@@ -1,0 +1,11 @@
+function (add_google_test testname source)
+	add_executable(${testname} ${source})
+	target_link_libraries(${testname} podiods ${ROOT_LIBRARIES} ${GTEST_BOTH_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+	target_include_directories(${testname} PUBLIC ${CMAKE_SOURCE_DIR}/inc ${ROOT_INCLUDE_DIRS})
+	if (EXTERNAL_GTEST)
+		add_dependencies(${testname} googletest)
+	endif()
+	add_test(${testname} ${testname})
+endfunction()
+
+add_google_test(tpodiods_unit tpodiods_unit.cxx)
